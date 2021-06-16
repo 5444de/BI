@@ -39,6 +39,9 @@ wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 下载相关组件：
 yum install cobbler cobbler-web dhcp tftp-server pykickstart httpd xinetd -y
 
+靠贴不上图 差评 走了
+
+
 
 
 
