@@ -1,0 +1,56 @@
+pxe：
+	实现自动化安装：dhcp,tftp,xientd ks httpd
+	images/(vmlinuz,initrd.img)
+	pxe缺点：只能实现安装一种操作系统	
+
+cobbler
+三大核心组件：repo，distro，profile 
+	将pxe进行高级的封装，实现可以同时安装多中操作系统
+	repository:安装树，yum源，多中操系统，需要每个系统有自己的安装yum源
+		import：导入一个yum源，一般基于http	
+		mirror：指向网络yum源
+	
+	Distrbution：Linux发行版 构成：vmlinuz+initrd
+	
+	profile：指定哪个引导程序和那个yum源是一体的，可以完成一个固定操作系统的启动和安装
+		yum repo vmlinuz initrd ks 
+		列子：centos6  yum+ vmlinuz initrd +centos6的ks文件
+        
+        
+Cobbler安装环境：
+[root@cobbler ~]# cat /etc/redhat-release
+CentOS Linux release 7.9.2009 (Core)
+
+安装组件：
+	cobbler：基础组件
+	cobbler-web：webGUI
+	httpd：发布开发树等
+	syslinux：用于生成pxelinux.0
+	tftp tftp-server:实现文件共享
+	xinetd：管理tftp
+	pykickstart：cobbler用于配置文件中的语法进行检查
+	debmirror：镜像管理工具
+	dhcp dhcp-common：用于分配IP    
+    
+配置源yum下载cobbler：
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+下载相关组件：
+yum install cobbler cobbler-web dhcp tftp-server pykickstart httpd xinetd -y
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
